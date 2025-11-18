@@ -1,27 +1,29 @@
-.header-container{
-    background: white;
-    border-radius: 2rem;
-    display:flex ;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
+.header-container {
+  background: transparent;
+  border-radius: 2rem;
+  padding: 10px 30px;
+  padding-top: 2rem;
+  width: 90%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
-.navbar{
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 10rem;
-    font-size: 20px;
-   
+.navbar {
+  display: flex;
+  list-style: none;
+  gap: 6rem;
+  font-size: 22px;
+  padding: 0;
+  margin: 0;
 }
 
-.navbar>li{
-    color: rgb(24, 184, 184);
-    font-weight: bold;
+.navbar > li {
+  color: rgba(178, 139, 228, 0.974);
+  font-weight: bold;
 }
 
-.navbar>li:hover{
-    color: aquamarine;
-    cursor: pointer;
+.navbar > li:hover {
+  color: rgb(95, 4, 253);
+  cursor: pointer;
 }
