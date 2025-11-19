@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./ImageCaption.css";
 
 const ImageCaption = () => {
   const [imageFile, setImageFile] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
   const [category, setCategory] = useState("");
   const [caption, setCaption] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const categories = [
     { name: "Romance", icon: "❤️" },
@@ -14,10 +16,20 @@ const ImageCaption = () => {
     { name: "Attitude", icon: "😎" },
   ];
 
+  useEffect(() => {
+    if (!imageFile) {
+      setImagePreview(null);
+      return;
+    }
+    const url = URL.createObjectURL(imageFile);
+    setImagePreview(url);
+    return () => URL.revokeObjectURL(url);
+  }, [imageFile]);
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImageFile(file); // store file object
+      setImageFile(file);
     }
   };
 
@@ -33,46 +45,61 @@ const ImageCaption = () => {
     e.preventDefault();
   };
 
-const generateCaption = async () => {
-  if (!imageFile) {
-    alert("Please upload an image!");
-    return;
-  }
-  if (!category) {
-    alert("Please select a category!");
-    return;
-  }
+  const generateCaption = async () => {
+    if (!imageFile) {
+      alert("Please upload an image!");
+      return;
+    }
+    if (!category) {
+      alert("Please select a category!");
+      return;
+    }
 
-  const formData = new FormData();
-  formData.append("image", imageFile);
-  formData.append("category", category);
+    setLoading(true);
+    setCaption("");
 
-  try {
-    const res = await fetch("http://localhost:8000/generate-caption", {
-      method: "POST",
-      body: formData,
-    });
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    formData.append("category", category);
 
-    const data = await res.json();
-    setCaption(data.caption);
+    try {
+      const res = await fetch("http://127.0.0.1:8000/generate-caption", {
+        method: "POST",
+        body: formData,
+      });
 
-  } catch (error) {
-    console.error("Error:", error);
-    alert("Error generating caption");
-  }
-};
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
 
+      const data = await res.json();
+      // Add a tiny delay for nicer UX (optional)
+      setTimeout(() => {
+        setCaption(data.caption || "No caption returned.");
+        setLoading(false);
+      }, 250);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error generating caption");
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="caption-container">
       <h2 className="title">UPLOAD IMAGE</h2>
 
-      {/* Drag & Drop upload area */}
-      <div className="drag-box" onDrop={handleDrop} onDragOver={handleDragOver}>
+      <div
+        className="drag-box"
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+      >
         {!imageFile ? (
           <>
-            <p className="drag-title">Drag & Drop</p>
-            <p className="drag-sub">Upload JPG, PNG (Max 10MB)</p>
+            <div>
+              <p className="drag-title">Drag & Drop</p>
+              <p className="drag-sub">Upload JPG, PNG (Max 10MB)</p>
+            </div>
             <input
               type="file"
               accept="image/*"
@@ -80,20 +107,28 @@ const generateCaption = async () => {
             />
           </>
         ) : (
-          <div className="file-info">
-            <p className="file-name">📁 {imageFile.name}</p>
+          <div className="file-preview">
+            {imagePreview && (
+              <img src={imagePreview} alt="preview" className="preview-img" />
+            )}
+            <div className="file-info">
+              <p className="file-name">📁 {imageFile.name}</p>
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              title="Replace image"
+            />
           </div>
         )}
       </div>
 
-      {/* Category boxes */}
       <div className="category-container">
         {categories.map((cat) => (
           <div
             key={cat.name}
-            className={`category-box ${
-              category === cat.name ? "active" : ""
-            }`}
+            className={`category-box ${category === cat.name ? "active" : ""}`}
             onClick={() => setCategory(cat.name)}
           >
             <div className="cat-icon">{cat.icon}</div>
@@ -102,12 +137,24 @@ const generateCaption = async () => {
         ))}
       </div>
 
-      {/* Button */}
-      <button className="caption-btn" onClick={generateCaption}>
-        Generate Caption
+      <button
+        className="caption-btn"
+        onClick={generateCaption}
+        disabled={loading}
+      >
+        {loading ? (
+          <span className="btn-loader">
+            <span className="spinner" /> Generating...
+          </span>
+        ) : (
+          "Generate Caption"
+        )}
       </button>
 
-      {caption && <p className="caption-output">{caption}</p>}
+      
+      {caption && (
+        <p className={`caption-output`}>{caption}</p>
+      )}
     </div>
   );
 };
