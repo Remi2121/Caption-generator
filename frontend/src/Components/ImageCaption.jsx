@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./ImageCaption.css";
 
 const ImageCaption = () => {
-  const [image, setImage] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
   const [category, setCategory] = useState("");
   const [caption, setCaption] = useState("");
 
@@ -16,36 +16,73 @@ const ImageCaption = () => {
 
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
-    if (file) setImage(URL.createObjectURL(file));
+    if (file) {
+      setImageFile(file); // store file object
+    }
   };
 
-  const generateCaption = () => {
-    if (!image) {
-      alert("Please upload an image!");
-      return;
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file && file.type.startsWith("image")) {
+      setImageFile(file);
     }
-    if (!category) {
-      alert("Please select a category!");
-      return;
-    }
-    setCaption(`Generated a ${category} style caption for your image!`);
   };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+const generateCaption = async () => {
+  if (!imageFile) {
+    alert("Please upload an image!");
+    return;
+  }
+  if (!category) {
+    alert("Please select a category!");
+    return;
+  }
+
+  const formData = new FormData();
+  formData.append("image", imageFile);
+  formData.append("category", category);
+
+  try {
+    const res = await fetch("http://localhost:8000/generate-caption", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    setCaption(data.caption);
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Error generating caption");
+  }
+};
+
 
   return (
     <div className="caption-container">
-      
       <h2 className="title">UPLOAD IMAGE</h2>
 
       {/* Drag & Drop upload area */}
-      <div className="drag-box">
-        {!image ? (
+      <div className="drag-box" onDrop={handleDrop} onDragOver={handleDragOver}>
+        {!imageFile ? (
           <>
             <p className="drag-title">Drag & Drop</p>
             <p className="drag-sub">Upload JPG, PNG (Max 10MB)</p>
-            <input type="file" accept="image/*" onChange={handleImageUpload} />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+            />
           </>
         ) : (
-          <img src={image} className="preview-img" alt="Preview" />
+          <div className="file-info">
+            <p className="file-name">📁 {imageFile.name}</p>
+          </div>
         )}
       </div>
 
@@ -54,7 +91,9 @@ const ImageCaption = () => {
         {categories.map((cat) => (
           <div
             key={cat.name}
-            className={`category-box ${category === cat.name ? "active" : ""}`}
+            className={`category-box ${
+              category === cat.name ? "active" : ""
+            }`}
             onClick={() => setCategory(cat.name)}
           >
             <div className="cat-icon">{cat.icon}</div>
@@ -63,7 +102,7 @@ const ImageCaption = () => {
         ))}
       </div>
 
-      {/* BUTTON ALWAYS VISIBLE */}
+      {/* Button */}
       <button className="caption-btn" onClick={generateCaption}>
         Generate Caption
       </button>

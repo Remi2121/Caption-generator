@@ -1,6 +1,7 @@
 .caption-container {
   width: 480px;
-  margin: 40px auto;
+  max-width: 92vw;
+  margin: auto;
   padding: 30px;
   background: #ffffff;
   border-radius: 16px;
@@ -16,13 +17,17 @@
   margin-bottom: 18px;
 }
 
-/* Drag & Drop Upload Box */
+/* Drag Box */
 .drag-box {
   border: 2px dashed #b5b5b5;
-  padding: 35px;
+  padding: 18px;
   border-radius: 14px;
   background: #fbfbfb;
   margin-bottom: 20px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   transition: 0.3s;
 }
@@ -53,12 +58,23 @@
   margin-top: 5px;
 }
 
-.preview-img {
-  max-width: 100%;
-  border-radius: 10px;
+/* File Name Box */
+.file-info {
+  background: #fff7e8;
+  border: 1px solid #ffbb77;
+  padding: 16px;
+  border-radius: 12px;
+  width: 90%;
 }
 
-/* Category Selector Boxes */
+.file-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #444;
+  word-break: break-all;
+}
+
+/* Category Boxes */
 .category-container {
   display: flex;
   justify-content: space-between;
@@ -99,7 +115,7 @@
   font-weight: 500;
 }
 
-/* Generate Button */
+/* Caption Button */
 .caption-btn {
   width: 70%;
   padding: 12px;
@@ -110,7 +126,6 @@
   font-size: 16px;
   color: white;
   transition: 0.25s;
-  margin-top: 10px;
 }
 
 .caption-btn:hover {
