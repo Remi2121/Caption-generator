@@ -1,4 +1,4 @@
-.header-container {
+.header-container{
   background: transparent;
   border-radius: 2rem;
   padding: 10px 30px;
@@ -21,9 +21,11 @@
 .navbar > li {
   color: rgba(178, 139, 228, 0.974);
   font-weight: bold;
+  transition: 0.3s ease;
 }
 
 .navbar > li:hover {
   color: rgb(95, 4, 253);
   cursor: pointer;
+  transform: scale(1.1);
 }
