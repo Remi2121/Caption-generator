@@ -1,19 +1,16 @@
-import React from 'react';
-import Header from './Components/Header/header';
-import ImageCaption from "./Components/imageCaption/ImageCaption";
+import React from "react";
 import bg from "./assets/background.jpg";
 import "./App.css";
-import Home from "../src/Home/Home"
+import Home from "./Home/Home";
 
 const App = () => {
   return (
     <div
-        className="app-background"
-        style={{ backgroundImage: `url(${bg})` }}
-      >
-      <Home/>
-      </div>
-    
+      className="app-background"
+      style={{ backgroundImage: `url(${bg})` }}
+    >
+      <Home />
+    </div>
   );
 };
 
