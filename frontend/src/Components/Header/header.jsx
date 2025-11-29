@@ -1,39 +1,45 @@
-import React from 'react'
-import { Link } from 'react-scroll'
-import './header.css'
+import React from "react";
+import "./header.css";
+import logo from "../../assets/logo.png";
 
 const Header = () => {
   return (
-    <div className='header-container'>
-      <ul className='navbar'>
-        
-        <li>
-          <Link to="imageCaption" smooth={true} duration={600} offset={-50}>
-            Image Caption
-          </Link>
-        </li>
+    <header className="header-container">
+      {/* Left side logo */}
+      <div className="logo-section">
+        <img src={logo} alt="CaptionGen Logo" className="logo-img" />
+        <h1 className="logo-text">
+          Caption<span>Gen</span>
+        </h1>
+      </div>
 
-        <li>
-          <Link to="multiLanguage" smooth={true} duration={600} offset={-50}>
-            Multi Language
-          </Link>
-        </li>
+      {/* Center Nav */}
+      <nav className="navbar">
+        <ul>
+          <li>
+            <a href="/image-caption" target="_blank" rel="noopener noreferrer">
+              Image Caption
+            </a>
+          </li>
+          <li>
+            <a href="/multi-language" target="_blank" rel="noopener noreferrer">
+              Multi Language
+            </a>
+          </li>
+          <li>
+            <a href="/profile-caption" target="_blank" rel="noopener noreferrer">
+              Profile Caption
+            </a>
+          </li>
+          <li>
+            <a href="/about-us" target="_blank" rel="noopener noreferrer">
+              About Us
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
-        <li>
-          <Link to="profileCaption" smooth={true} duration={600} offset={-50}>
-            Profile Caption
-          </Link>
-        </li>
-
-        <li>
-          <Link to="aboutUs" smooth={true} duration={600} offset={-50}>
-            About Us
-          </Link>
-        </li>
-
-      </ul>
-    </div>
-  )
-}
-
-export default Header
+export default Header;

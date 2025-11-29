@@ -1,0 +1,17 @@
+/* remove default gaps */
+:root{
+  --header-h: 72px; /* keep the header height in one place */
+}
+
+html, body { margin: 0; padding: 0; }
+
+/* push content below fixed header */
+.page-content{
+  padding-top: calc(var(--header-h) + 16px);
+}
+
+/* optional: center the first card nicely on big screens */
+#imageCaption, #multiLanguage, #profileCaption, #aboutUs{
+  display: flex;
+  justify-content: center;
+}
