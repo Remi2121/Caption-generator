@@ -3,31 +3,33 @@ import './Home.css'
 import Header from '../Components/Header/header'
 import ImageCaption from '../Components/imageCaption/ImageCaption'
 import AboutUs from '../Components/Aboutus/AboutUs'
-import MultiLan from '../Components/Multi language/multilan'
+import MultiLan from '../Components/Multilanguage/multilan'
 import Profilecap from '../Components/Profilecaption/profilecap'
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Header/>
 
-      <div id="imageCaption">
-        <ImageCaption/>
-      </div>
+      {/* Everything below the header */}
+      <main className="page-content">
+        <div id="imageCaption">
+          <ImageCaption/>
+        </div>
 
-      <div id="multiLanguage">
-        <MultiLan/>
-      </div>
+        <div id="multiLanguage">
+          <MultiLan/>
+        </div>
 
-      <div id="profileCaption">
-        <Profilecap/>
-      </div>
+        <div id="profileCaption">
+          <Profilecap/>
+        </div>
 
-      <div id="aboutUs">
-        <AboutUs/>
-      </div>
-
-    </div>
+        <div id="aboutUs">
+          <AboutUs/>
+        </div>
+      </main>
+    </>
   )
 }
 
