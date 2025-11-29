@@ -1,6 +1,7 @@
 import React from "react";
 import "./header.css";
 import logo from "../../assets/logo.png";
+import Profilecap from "../Profilecaption/profilecap";
 
 const Header = () => {
   return (
