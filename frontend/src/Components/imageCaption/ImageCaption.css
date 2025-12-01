@@ -9,12 +9,12 @@
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
   font-family: "Poppins", sans-serif;
   margin-top: 2rem;
+  margin-top: calc(var(--header-h) + 16px);
 }
 
 /* Title */
 .title {
   font-size: 24px;
-  color: #ff7b00;
   margin-bottom: 18px;
   font-weight: bold;
   

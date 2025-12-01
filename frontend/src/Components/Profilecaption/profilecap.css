@@ -1,3 +1,8 @@
+:root{
+  --header-h: 72px; /* keep the header height in one place */
+}
+
+
 /* ===== Section wrapper (centers the card like ImageCaption) ===== */
 .profilecap-container{
   width: auto;
@@ -9,18 +14,30 @@
   padding: 60px 16px;
   box-sizing: border-box;
   background: white;
-  margin-top: 2rem;
+  margin-top: calc(var(--header-h) + 16px);
   border-radius: 2rem;
 }
 
 /* ===== Title + subtitle ===== */
 .profilecap-title{
-  margin: 0 0 8px;
-  font-size: 28px;
-  font-weight: 800;
-  letter-spacing: .4px;
-  color: #ff7a00;              /* same orange heading */
+  margin-top: -30px;
   text-align: center;
+}
+
+.profilecap-title h2
+{
+  margin-top: 8px;
+  font-size: 35px;
+  font-weight: bold;
+  color: transparent;
+}
+
+.profilecap-title h3
+{
+  margin-top: 2px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #e35b07c9;
 }
 
 .profilecap-subtext{
