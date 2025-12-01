@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ImageCaption.css";
+import Header from "../Header/header";
 
 const ImageCaption = () => {
   const [imageFile, setImageFile] = useState(null);
@@ -86,8 +87,10 @@ const ImageCaption = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="caption-container">
-      <h2 className="title">UPLOAD IMAGE</h2>
+      <h2 className="stoke-text title">UPLOAD IMAGE</h2>
 
       <div
         className="drag-box"
@@ -156,6 +159,7 @@ const ImageCaption = () => {
         <p className={`caption-output`}>{caption}</p>
       )}
     </div>
+    </>
   );
 };
 

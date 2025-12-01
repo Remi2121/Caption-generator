@@ -1,0 +1,19 @@
+:root{
+  --header-h: 72px; /* keep the header height in one place */
+}
+
+
+/* ===== Section wrapper (centers the card like ImageCaption) ===== */
+.aboutus-container{
+  width: 100vh;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 16px;
+  box-sizing: border-box;
+  background: white;
+  margin-top: calc(var(--header-h) + 16px);
+  border-radius: 2rem;
+}
