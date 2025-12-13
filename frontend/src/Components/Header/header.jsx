@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+
 import "./header.css";
 import logo from "../../assets/logo.png";
 
@@ -15,10 +16,12 @@ const Header = () => {
 
       <nav className="navbar">
         <ul>
-          <li><Link to="/image-caption">Image Caption</Link></li>
-          <li><Link to="/multi-language">Multi Language</Link></li>
-          <li><Link to="/profile-caption">Profile Caption</Link></li>
-          <li><Link to="/about-us">About Us</Link></li>
+          <li><NavLink to="/image-caption">Image Caption</NavLink></li>
+          <li><NavLink to="/multi-language">Multi Language</NavLink></li>
+          <li><NavLink to="/profile-caption">Profile Caption</NavLink></li>
+          <li><NavLink to="/about-us">About Us</NavLink></li>
+          <li><NavLink to="/eventcaption">Event Caption</NavLink></li>
+
         </ul>
       </nav>
     </header>

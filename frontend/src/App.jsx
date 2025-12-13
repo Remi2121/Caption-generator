@@ -8,6 +8,7 @@ import ImageCaption from "./Components/imageCaption/ImageCaption.jsx";
 import ProfileCaption from "./Components/Profilecaption/profilecap.jsx";
 import MultiLan from "./Components/Multilanguage/multilan.jsx";
 import AboutUs from "./Components/Aboutus/AboutUs.jsx";
+import Event from "./Components/Event/EventCaption.jsx";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/profile-caption" element={<ProfileCaption />} />
           <Route path="/multi-language" element={<MultiLan />} />
           <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/eventcaption" element={<Event />} />
         </Routes>
       </Router>
     </div>
