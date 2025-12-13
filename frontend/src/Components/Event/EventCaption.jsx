@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./EventCaption.css";
-import Header from "../Header/header";
+
 
 const EventCaption = () => {
   const [event, setEvent] = useState("New Year");
@@ -11,8 +11,7 @@ const EventCaption = () => {
   };
 
   return (
-   <>
-    <Header />
+
     <div className="event-wrapper">
       <h1 className="event-title">🎉 Event-Based Captions</h1>
 
@@ -41,7 +40,7 @@ const EventCaption = () => {
         {caption ? caption : "🎯 Your event caption will appear here..."}
       </div>
     </div>
-    </>
+    
     
   );
 };

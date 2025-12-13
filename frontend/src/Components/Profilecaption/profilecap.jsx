@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./profilecap.css";
-import Header from "../Header/header";
+
 
 const Profilecap = () => {
   const [keywords, setKeywords] = useState("");
@@ -68,8 +68,7 @@ const Profilecap = () => {
   };
 
   return (
-    <>
-      <Header />
+
       <div className="profilecap-container" id="profileCaption">
       <div className="profilecap-title">
         <h2 className="stoke-text">Professional Profile </h2>
@@ -173,7 +172,7 @@ const Profilecap = () => {
           )}
         </div>
       </div>
-    </>
+    
   );
 };
 
